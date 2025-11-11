@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>豪的個人介紹網站</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Microsoft JhengHei", sans-serif;
+        background-color: #f5f7fa;
+        color: #333;
+        transition: background 0.5s, color 0.5s;
+    }
+
+    header {
+        background: #4f7cac;
+        color: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+        font-size: 1.6em;
+        animation: slideIn 1s ease forwards;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        position: relative;
+    }
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: white;
+        transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    button {
+        background: #ffffff30;
+        border: 1px solid white;
+        color: white;
+        border-radius: 8px;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: white;
+        color: #4f7cac;
+    }
+
+    main {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+        text-align: center;
+        animation: fadeIn 1s ease;
+    }
+
+    section {
+        display: none;
+        animation: fadeSlide 0.6s ease;
+    }
+
+    section.active {
+        display: block;
+    }
+
+    h2 {
+        color: #4f7cac;
+        border-bottom: 2px solid #4f7cac;
+        display: inline-block;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+
+    .avatar {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        border: 4px solid #4f7cac;
+        margin: 20px auto;
+        display: block;
+        opacity: 0;
+        transform: scale(0.9);
+        animation: fadePop 1s forwards 0.3s;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin: 8px 0;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: #4f7cac;
+        color: white;
+        font-size: 0.9em;
+        margin-top: 50px;
+    }
+
+    /* === 動畫效果 === */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+        from { transform: translateX(-30px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeSlide {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadePop {
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    /* === 深色模式 === */
+    .dark-mode {
+        background-color: #1e1e1e;
+        color: #f2f2f2;
+    }
+
+    .dark-mode header {
+        background: #333;
+    }
+
+    .dark-mode footer {
+        background: #333;
+    }
+
+    .dark-mode nav a::after {
+        background: #f2f2f2;
+    }
+
+    .dark-mode button {
+        border-color: #ddd;
+        color: #ddd;
+    }
+
+    .dark-mode button:hover {
+        background: #ddd;
+        color: #333;
+    }
+
+    /* RWD */
+    @media (max-width: 600px) {
+        nav ul {
+            flex-direction: column;
+            background: #4f7cac;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            width: 100%;
+            display: none;
+        }
+
+        nav ul.show {
+            display: flex;
+        }
+
+        header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .menu-toggle {
+            display: block;
+            margin-top: 5px;
+        }
+    }
+
+</style>
+</head>
+<body>
+    <header>
+        <h1>豪的個人網頁</h1>
+        <nav>
+            <ul id="navList">
+                <li><a href="#" data-target="home">首頁</a></li>
+                <li><a href="#" data-target="about">關於我</a></li>
+                <li><a href="#" data-target="skills">技能</a></li>
+                <li><a href="#" data-target="contact">聯絡我</a></li>
+            </ul>
+        </nav>
+        <button id="themeToggle">🌙 深色模式</button>
+    </header>
+
+    <main>
+        <section id="home" class="active">
+            <img src="https://i.imgur.com/8Km9tLL.png" alt="頭像" class="avatar">
+            <h2>嗨！我是豪 👋</h2>
+            <p>歡迎來到我的個人介紹網站，我是一名正在學習 C++、C#、以及網頁開發的學生，熱愛 AI 技術與區塊鏈應用。</p>
+        </section>
+
+        <section id="about">
+            <h2>關於我</h2>
+            <p>就讀於大華科技大學工管系，喜歡學習新技術與挑戰不同的專題開發。曾開發過電影售票系統、LoL資料管理系統與預測賽程專案。</p>
+        </section>
+
+        <section id="skills">
+            <h2>技能</h2>
+            <ul>
+                <li>💻 程式語言：C++、C#、HTML、CSS、JavaScript</li>
+                <li>🧠 AI與資料應用：ChatGPT、語音學習、資料分析</li>
+                <li>🎮 專題開發：WinForms 應用系統、比賽預測圖表</li>
+                <li>📚 版本控制：GitHub 基礎操作</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>聯絡方式</h2>
+            <ul>
+                <li>📧 Email：example@gmail.com</li>
+                <li>📱 IG：@your_instagram</li>
+                <li>🌐 GitHub：github.com/yourusername</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        © 2025 豪的個人網站 | 由 HTML + CSS + JS 製作
+    </footer>
+
+    <script>
+        // === 導覽列切換 ===
+        const links = document.querySelectorAll("nav a");
+        const sections = document.querySelectorAll("main section");
+
+        links.forEach(link => {
+            link.addEventListener("click", e => {
+                e.preventDefault();
+                const targetId = link.dataset.target;
+                sections.forEach(sec => sec.classList.remove("active"));
+                document.getElementById(targetId).classList.add("active");
+                // 小動畫：滑動到頂部
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        });
+
+        // === 深色模式切換 ===
+        const btn = document.getElementById("themeToggle");
+        btn.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            btn.textContent = document.body.classList.contains("dark-mode") ? "☀️ 亮色模式" : "🌙 深色模式";
+        });
+    </script>
+</body>
+</html>
